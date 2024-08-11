@@ -1,0 +1,60 @@
+#本地选择开启swagger
+swagger:
+  enabled: true
+
+server:
+  #(改)启动端口，一台服务器唯一
+  port: 8080
+  #(改)应用上下文，统一用/tps-local
+  servlet:
+    context-path: /jinbiao-study
+thread:
+  core-pool-size: 10
+  max-connections: 2000
+  max-threads: 500
+
+spring:
+  elasticsearch:
+    uris: http://localhost:9200
+    connection-timeout: 3s
+
+  main:
+    allow-bean-definition-overriding: true # 意思是后来发现的bean会覆盖之前相同名称的bean
+  application:
+    #(改)项目名称，建议使用hsa-tps-local，和包名一致
+    name: jinbiao-study
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://127.0.0.1:3306/xiaofa_lawyer?connectTimeout=1000000&socketTimeout=3000000&autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8&allowMultiQueries=true
+    driver-class-name: com.mysql.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: com.powersi.entity
+  #设置sql打印
+  configuration:
+    database-id: ${mybatis.database.provider.type:mysql}
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #设置驼峰命名法
+    map-underscore-to-camel-case: true
+
+# webSocket启动端口
+im:
+  server:
+    port: 40002                #套接字端口
+    allIdleTimeSeconds: 180    #所有类型的空闲超时时间,所有类型的空闲超时时间设定，包括读空闲和写空闲
+    readerIdleTimeSeconds: 7   #读空闲超时时间
+    writerIdleTimeSeconds: 3   #写空闲超时时间
+
+#showSql
+logging:
+  level:
+    root: info
+    com.powersi.dao: debug
+
+#mybatis-plus打印sql信息
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
