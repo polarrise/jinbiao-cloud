@@ -43,7 +43,7 @@ public class VirtualThreadServiceImpl implements VirtualThreadService {
     /**
      * 创建线程数量
      */
-    private static Integer THREAD_NUM = 10000;
+    private static Integer THREAD_NUM = 1000;
 
     /**
      * 虚拟线程方法执行时间: 5042 毫秒
@@ -57,7 +57,7 @@ public class VirtualThreadServiceImpl implements VirtualThreadService {
             virtualThreadExecutor.execute(() -> {
                 // 模拟耗时任务
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(1000);
                     System.out.println("虚拟线程任务完成！");
                     taskLatch.countDown();
                 } catch (InterruptedException e) {
@@ -79,7 +79,7 @@ public class VirtualThreadServiceImpl implements VirtualThreadService {
             asyncTaskExecutor.execute(() -> {
                 // 模拟耗时任务
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(1000);
                     System.out.println("普通线程任务完成！");
                     taskLatch.countDown();
                 } catch (InterruptedException e) {

@@ -8,10 +8,6 @@ server:
   #(改)应用上下文，统一用/tps-local
   servlet:
     context-path: /jinbiao-study
-thread:
-  core-pool-size: 10
-  max-connections: 2000
-  max-threads: 500
 
 spring:
   elasticsearch:

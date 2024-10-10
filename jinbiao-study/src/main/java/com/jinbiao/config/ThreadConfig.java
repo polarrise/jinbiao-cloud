@@ -17,26 +17,17 @@ import java.util.concurrent.Executors;
 @Configuration
 @EnableAsync
 public class ThreadConfig {
-
-    @Value("${thread.core-pool-size}")
-    private int corePoolSize;
-
-    @Value("${thread.max-connections}")
-    private int maxConnections;
-
-    @Value("${thread.max-threads}")
-    private int maxThreads;
-
     /**
      * 一个 Java普通线程对应一个操作系统线程，这些线程非常消耗资源：
+     * 普通线程池定义：16个核心线程(模拟IO密集型任务，每个任务休眠2s)，最大线程数50，阻塞队列1000：避免触发拒绝策略
      * @return
      */
     @Bean(name = "asyncTaskExecutor")
     public ThreadPoolTaskExecutor asyncTaskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(corePoolSize);
-        executor.setMaxPoolSize(maxThreads);
-        executor.setQueueCapacity(maxConnections);
+        executor.setCorePoolSize(16);
+        executor.setMaxPoolSize(50);
+        executor.setQueueCapacity(1000);
         executor.setThreadNamePrefix("Async-");
         executor.initialize();
         return executor;
